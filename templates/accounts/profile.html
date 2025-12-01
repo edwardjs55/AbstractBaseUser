@@ -3,16 +3,22 @@
 {% block content %}
 <div class="row">
   <div class="col-lg-8 col-md-10 col-sm-12 mx-auto text-center bg-light py-3 mt-3">    
-
-    
+     
     <h1>Welcome!</h1>
-
     <p>Username: {{ user.username }}</p>
-    <p>Email: {{ user.email }}</p>
 
+    <p>Email: {{ user.email }}</p>
+    <p> {{ user.first_name }} {{ user.last_name }}</p>
+    <!-- {% if user.profile.bio %}
+      <p>Bio: {{ user.profile.bio }}</p>
+    {% else %}
+      <p>No bio available.</p>
+    {% endif %} -->
+        
     <div class="">    <!-- text-center py-2"> -->
-        <small>
-            <a href="{% url 'password_change' %}" class="text-muted">Change your Password</a>
+      <small>
+          <a href="{% url 'profile_edit' %}" class="text-muted"><button>Edit Your Profile</button></a><br><br>
+          <a href="{% url 'password_change' %}" class="text-muted">Change your Password</a>
         </small>
     </div>
   </div>

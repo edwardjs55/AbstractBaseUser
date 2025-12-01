@@ -1,0 +1,41 @@
+{% extends "pets/pets_base.html" %}
+{% block title %}Pets Home{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-lg-8 col-md-10 col-sm-12 mx-auto text-center bg-light py-3 mt-3 pb-5">
+        <h1>All Your Pets List</h1>
+        <!-- <h2>Your Pets List</h2> -->
+        {% if user.is_authenticated %}
+        <p>{{ user.username }}</p> <!--  Welcome message -->
+        {% endif %}
+        <a href="{% url 'newpet' %}">Add a New Pet</a>
+        {% if pet_list %}
+        <table class="pet_list">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Type</th>
+                    <th>Description</th>
+                    <th colspan="2">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for pet in pet_list %}
+                <tr>
+                    <td>{{ pet.name }}</td>
+                    <td>{{ pet.animal_type }}</td>
+                    <td>{{ pet.description }}</td>
+                    <td><a href="{% url 'logs' id=pet.id %}"><button>Log</button></a></td>
+                    <td><a href="{% url 'petprofile' id=pet.id %}" title="Pet Profile"><button>Bio</button></a></td>
+                    <td><a href="{% url 'deletepet' pk=pet.id id=pet.id %} "><button title="Delete">Del</button></a></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p>No pets have been logged.</p>
+        <p>Add a <a href="{% url 'newpet' %}">New Pet</a>.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

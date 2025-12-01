@@ -1,0 +1,47 @@
+{% extends "pets/pets_base.html" %}
+{% block title %}Pet Logs{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-lg-8 col-md-10 col-sm-12 mx-auto text-center bg-light py-3 mt-3 pb-5">    
+        
+        <h1>{{ pet.name }}'s' Log</h1>        
+        <!-- <h2>Your Pets List</h2> -->
+        {% if user.is_authenticated %}
+        <p>{{ user.username }}'s Pets</p>
+        <!-- <p>pet_id:{{ pet.id }}</p> -->
+        {% endif %}
+        <!-- <h4>{{ pet.name }}</h4> -->
+        <a href="{% url 'newpetlog' id=pet.id %}">Log a new Pet Action</a>
+
+        {% if pet_log_list %}
+        <table class="pet_list">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Category</th>
+                        <th colspan="2">Action</th>
+                        <th>Date</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for obj in pet_log_list %}
+                    <tr>
+                        <td>{{ pet.name }}</td>
+                        <td>{{ obj.category }}</td>
+                        <td colspan="2">{{ obj.action }}</td>
+                        <td>{{ obj.timestamp| date:'m/d/y' }}</td> <!-- 'm/d/y P' 'F j, Y, g:i a' -->
+                        <!-- <td><a href=""><button >Edit</button></a></td> -->
+                        <td><a href="{% url 'editpetlog' pk=obj.id id=pet.id %}"><button >Edit</button></a></td>
+                        <td><a href="{% url 'deletepetlog' pk=obj.id id=pet.id %}"><button >Delete</button></a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No pet logs have been logged.</p>
+            <p>Add a <a href="{% url 'newpetlog' id=pet.id %}">New Pet Log</a>.</p>
+        {% endif %}
+            <br><p>Go Back to <a href="{% url 'pets' %}">All Your Pets List</a>.</p> 
+  </div>
+</div>
+{% endblock %}

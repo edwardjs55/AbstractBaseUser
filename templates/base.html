@@ -27,9 +27,17 @@
                 {% csrf_token %}
                 <!-- <a class="nav-link" href="{% url 'logout' %}">Logout</a> -->
                 <input class=" nav-link fs-5" type="submit" value="Logout" />
-
               </form>
             </li>
+            <div class="mx-auto" style="display: ruby;">
+              <li class="nav-item">
+                <a class="nav-link fs-5" href="{% url 'pets' %}">Cats</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link fs-5" href="{% url 'pets' %}">Family</a>
+              </li>
+            </div>
+
             <li class="ms-md-auto me-md-4 nav-item">
               <a class="nav-link fs-5" href="{% url 'profile' %}">Logged in as: <b>{{ request.user.username }}</b></a>
             </li>

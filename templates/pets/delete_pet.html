@@ -1,0 +1,21 @@
+{% extends "pets/pets_base.html" %}
+{% block title %}Delete Pet{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-8 col-md-10 col-sm-12 mx-auto text-center bg-light py-3 mt-3 pb-5">
+        <h1>Delete This Pet</h1>
+        <p>{{ user.username }}'s Pets</p>
+        <h3>{{ object.name }}</h3>
+        <p>{{ object.description }}</p>
+        <form method="post">
+            {% csrf_token %}
+            Are you sure you want to delete {{ object.name }} from your Pets List ?<br>
+
+            <br>
+            <button type="submit">Delete This Pet Log</button>
+            <a href="{% url 'pets' %}"><button type="button">No, Return to Pets</button></a>
+        </form>
+    </div>
+</div>
+{% endblock %}

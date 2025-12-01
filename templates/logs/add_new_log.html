@@ -1,0 +1,18 @@
+{% extends "pets/pets_base.html" %}
+{% block title %}New Pet Log{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-8 col-md-10 col-sm-12 mx-auto text-center bg-light py-3 mt-3 pb-5">
+        <h1>Add New Pet Log</h1>
+        <p>{{ user.username }} Pets</p>
+        <p>{{ pet.name }}</p>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Add New Pet Log</button>
+            <a href="{% url 'logs' id=pet.id %}"><button type="button">Pet Logs</button></a>
+        </form>
+    </div>
+</div>
+{% endblock %}
