@@ -67,6 +67,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                
+                'django.template.context_processors.media', # set this explicitly EJS
             ],
         },
     },
@@ -144,4 +146,10 @@ LOGOUT_REDIRECT_URL = "login"
 
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# Source - https://stackoverflow.com/a
+# Posted by MPerez, modified by community. See post 'Timeline' for change history
+# Retrieved 2025-12-04, License - CC BY-SA 4.0
+
+
 

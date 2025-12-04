@@ -15,7 +15,7 @@
                 <tr>
                     <th>Image</th>
                     <th>Name</th>
-                    <th>Type</th>
+                    <!-- <th>Type</th> -->
                     <th>Description</th>
                     <th colspan="2">Actions</th>
                 </tr>
@@ -25,12 +25,14 @@
                 <tr>
                     <td>
                     {% if pet.avatar %}
-                            <img src= "/media/{{ pet.avatar }}" alt="Pet Avatar" class="img-fluid rounded-circle" style="max-width: 40px;"> 
+                    <!-- <img src= "{{ pet.avatar.url }} " alt="Pet Avatar" class="img-fluid rounded-circle" style="max-width: 40px;">  -->
+                    <img src= "/media/{{ pet.avatar }}" alt="Pet Avatar" class="img-fluid rounded-circle" style="max-width: 40px; max-height: 40px;"> 
+                    <!-- <img src= "{{ MEDIA_URL }} {{ pet.avatar }}" alt="Pet Avatar" class="img-fluid rounded-circle" style="max-width: 40px;">  -->
                     {% endif %}
                     </td>
                     <!-- <td>{{ pet.avatar.url }}</td> -->
                     <td>{{ pet.name }}</td>
-                    <td>{{ pet.animal_type }}</td>
+                    <!-- <td>{{ pet.animal_type }}</td> -->
                     <td>{{ pet.description }}</td>
                     <td><a href="{% url 'logs' id=pet.id %}"><button>Log</button></a></td>
                     <td><a href="{% url 'petprofile' id=pet.id %}" title="Pet Profile"><button>Bio</button></a></td>
