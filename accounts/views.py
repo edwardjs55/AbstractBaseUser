@@ -4,6 +4,7 @@ from django.contrib import messages
 from .forms import CustomUserCreationForm, CustomUserUpdateForm, LoginForm, ProfileUpdateForm
 from django.contrib.auth.decorators import login_required
 
+# Registration View
 def register(request):
     if request.method == 'POST':
         form = CustomUserCreationForm(request.POST)
@@ -37,11 +38,13 @@ def logout_view(request):
     logout(request)
     return redirect('home')
 
+#  Profile View
 @login_required
 def profile(request):    
     return render(request, 'accounts\profile.html')
 
 
+# Profile Edit View
 @login_required
 def profileEdit(request):
     user = request.user
@@ -49,13 +52,11 @@ def profileEdit(request):
     
     if request.method == 'POST':
         user_form = CustomUserUpdateForm(request.POST, instance=request.user)        
-        user_profile_form = ProfileUpdateForm(request.POST, instance=request.user.profile)
-        if user_form.is_valid() and user_profile_form.is_valid():            
+        user_profile_form = ProfileUpdateForm(request.POST,request.FILES, instance=request.user.profile)
+        if user_form.is_valid() and user_profile_form.is_valid(): 
+            #print("Forms are valid :",user_profile_form.cleaned_data)           
             user_form.save()
-            user_profile_form.save()
-            #obj.user = request.user
-            #print("Saving profile for user:", request.user)
-            #obj.save()
+            user_profile_form.save()            
             return redirect('profile')
     else:    
         user_form = CustomUserUpdateForm(instance=request.user)
@@ -64,7 +65,6 @@ def profileEdit(request):
         context = {
             'user_form': user_form,
             'profile_form': user_profile_form,
-        }
-        
+        }        
         return render(request, 'accounts\profile_edit.html', context)
 

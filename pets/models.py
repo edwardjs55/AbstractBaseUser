@@ -11,8 +11,10 @@ class MyPets(models.Model):
         related_name='user', )
     name = models.CharField(max_length=100)
     animal_type = models.CharField(max_length=100)
-    description = models.TextField()    
+    description = models.TextField()
+    avatar = models.ImageField(default='pet_avatars/default.jpg',upload_to='pet_avatars/', null=True, blank=True)    
     created_at = models.DateTimeField(auto_now_add=True)
+    last_modified = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
             return self.name

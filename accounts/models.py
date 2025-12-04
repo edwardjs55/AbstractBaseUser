@@ -47,6 +47,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 
 class Profile(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    avatar = models.ImageField(default='default.jpg', upload_to='profile_images/', blank=True, null=True)
     bio = models.TextField(blank=True)
 
     def __str__(self):

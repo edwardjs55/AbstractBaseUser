@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import CustomUser
+from .models import CustomUser,Profile
 
 # Register your models here.
 class CustomUserModelAdmin(admin.ModelAdmin):
@@ -14,3 +14,5 @@ class CustomUserModelAdmin(admin.ModelAdmin):
         readonly_fields = ('created_at','last_login')
 
 admin.site.register(CustomUser,CustomUserModelAdmin)
+admin.site.register(Profile)
+

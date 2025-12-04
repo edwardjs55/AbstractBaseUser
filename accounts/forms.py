@@ -7,7 +7,7 @@ class CustomUserCreationForm(UserCreationForm):
 
     class Meta:
         model = CustomUser
-        fields = ('email','username', 'password1', 'password2','first_name','last_name',)
+        fields = ('email','username', 'password1', 'password2','first_name','last_name')
 
 class LoginForm(forms.Form):
     username = forms.CharField(max_length=150)
@@ -16,7 +16,7 @@ class LoginForm(forms.Form):
 class ProfileUpdateForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ('bio',)
+        fields = ('avatar','bio',)
         
 class CustomUserUpdateForm(forms.ModelForm):
     class Meta:

@@ -9,6 +9,12 @@
 
     <p>Email: {{ user.email }}</p>
     <p> {{ user.first_name }} {{ user.last_name }}</p>
+    {% if user.profile.avatar %}
+      <img src="{{ user.profile.avatar.url }}" alt="Profile Avatar" class="img-fluid rounded-circle" style="max-width: 150px; max-height: 150px;">
+      <br><br>
+    {% else %}
+      <p>No avatar uploaded.</p>
+    {% endif %}
     <!-- {% if user.profile.bio %}
       <p>Bio: {{ user.profile.bio }}</p>
     {% else %}

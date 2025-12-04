@@ -1,0 +1,18 @@
+{% extends "pets/pets_base.html" %}
+{% block title %}Pet Profile{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-8 col-md-10 col-sm-12 mx-auto text-center bg-light py-3 mt-3 pb-5">
+        <h1>Pet Profile</h1>
+        <!-- <p>pet profile</p> -->
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Save Pet Profile</button>
+        </form><br>
+        <a href="{% url 'petprofile' id=pet.id %}">Return to Pet Profile</a><br>
+        <a href="{% url 'pets'  %}">Return to Pets List</a>
+    </div>
+</div>
+{% endblock %}

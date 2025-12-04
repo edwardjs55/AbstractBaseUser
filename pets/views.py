@@ -60,18 +60,26 @@ def Delete_Pets_Object(request,pk,id):
         return redirect('pets') # Redirect to a success page
     return render(request, 'pets/delete_pet.html', {'object': obj})
 
+# pet_profile view to display pet details
 @login_required
 def pet_profile(request,id):
-    # pet = MyPets.objects.filter(id=id)
-    
+    pet = MyPets.objects.get(id=id)    
+    form = MyPetsForm(instance=pet)  # Initialize form with existing pet data
+    context = {'pet': pet}
+    #context = {'form': form}
+    return render(request, 'pets/pet_profile.html', context)
+                  
+# pet_profile_Edit view to edit pet details
+@login_required
+def pet_profile_edit(request,id):
+    # pet = MyPets.objects.filter(id=id)    
     obj = get_object_or_404(MyPets, id=id) # Retrieve the object to edit
     print(obj.name)
     if request.method == 'POST':
-        form = MyPetsForm(request.POST, instance=obj) # Bind submitted data to the form, with the existing object as instance
+        form = MyPetsForm(request.POST,request.FILES, instance=obj) # Bind submitted data to the form, with the existing object as instance
         if form.is_valid():
             form.save() # Save changes to the existing object
-            return redirect('pets') # Redirect to a success page or object detail
+            return redirect('petprofile', id) # Redirect to a success page or object detail
     else:
         form = MyPetsForm(instance=obj) # Initialize form with existing object data for display
-    
-    return render(request, 'pets/pet_profile.html', {'form': form})
+    return render(request, 'pets/pet_profile_edit.html', {'form': form, 'pet': obj})
