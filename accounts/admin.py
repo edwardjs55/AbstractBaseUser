@@ -6,7 +6,7 @@ class CustomUserModelAdmin(admin.ModelAdmin):
         list_display = ('username', 'email', 'id') # Fields to display in the list view
         search_fields = ('username', 'email') # Fields to search by
         fields = ('email','username', ('first_name','last_name'),
-        ('password'),('is_superuser','is_staff','is_active'),('created_at','last_login'),
+        ('password'),('hint'),('is_superuser','is_staff','is_active'),('created_at','last_login'),
         ('groups','user_permissions'))
 
         # ... other customizations

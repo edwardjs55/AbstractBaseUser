@@ -15,9 +15,9 @@
 <body>
 
   {% block navbar %}
-  <nav class="navbar navbar-expand-sm bg-light">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="{% url 'home' %}">MyPets</a>
+  <nav class="navbar navbar-expand-sm bg-light" >
+        <div class="container-fluid">
+      <a class="navbar-brand fw-bold" href="{% url 'home' %}">MyPets</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -59,10 +59,10 @@
   {% endblock navbar %}
 
   {% block body %}
-  <div class="container">
-    <h1 class="text-center logo my-4">
-      <a href="{% url 'home'%}">All My Pets Records</a>
-    </h1>
+  <div class="container-fluid">
+    <!-- <h1 class="text-center logo my-4">
+      <a href="{% url 'pets'%}">All My Pets Records</a>
+    </h1> -->
     {% block content %}
       AbstractBasUser CustomUser Project
     {% endblock content %}

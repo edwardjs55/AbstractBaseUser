@@ -4,15 +4,17 @@
 
 {% block content %}
 <div class="row">
-  <div class="col-lg-8 col-md-10 col-sm-12 mx-auto text-center bg-light py-3 mt-3">
-
-    <h2>Registration</h2>
+  <div class=" mycp col-lg-8 col-md-10 col-sm-12 mx-auto text-center bg-light py-3 mt-5"
+       style="min-height: 500px;">
+    <h1>MyPets User Registration</h1><br>
     <form method="post">
       {% csrf_token %}
       {{ form.as_p }}
+
+      <br>
       <button type="submit">Register</button>
       <a href="{% url 'login' %}"><button type="button">Already Registered</button></a>
-    </form>
+    </form><br>
   </div>
 </div>
 {% endblock %}

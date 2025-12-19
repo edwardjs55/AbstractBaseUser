@@ -2,20 +2,57 @@
 {% block title %}Pets Home{% endblock %}
 {% block content %}
 <div class="row">
-    <div class="col-lg-8 col-md-10 col-sm-12 mx-auto text-center bg-light py-3 mt-3 pb-5">
+    <div class="mycp col-lg-8 col-md-10 col-sm-12 mx-auto text-center bg-light py-3 mt-5 pb-5">
         <h1>All Your Pets List</h1>
         <!-- <h2>Your Pets List</h2> -->
         {% if user.is_authenticated %}
-        <p>{{ user.username }}</p> <!--  Welcome message -->
-        {% endif %}
-        <a href="{% url 'newpet' %}">Add a New Pet</a>
         {% if pet_list %}
-        <table class="pet_list">
+        <h4 class="mt-4">{{ user.username }} , you have {{ pet_list|length }} {{ pet_list|length|pluralize:"pet,pets" }}.</h4>
+        <!-- <p>{{ user.username }}</p>  Welcome message -->
+        {% endif %}
+        {% endif %}
+        <a href="{% url 'newpet' %}" class="display-6 text-decoration-none">Add a New Pet</a>
+        <hr>
+        
+        {% if pet_list %}
+        <!-- <h3 class="mt-4">You have {{ pet_list|length }} {{ pet_list|length|pluralize:"pet,pets" }}.</h3> -->
+        {% for pet in pet_list %}
+        <div class="row align-items-start border border-secondary rounded p-1 mb-2 mx-1">
+            <div class="col-1 p-0">
+                {% if pet.avatar %}
+                <!-- <img src= "{{ pet.avatar.url }} " alt="Pet Avatar" class="img-fluid rounded-circle" style="max-width: 40px;">  -->
+                <img src= "/media/{{ pet.avatar }}" alt="Pet Avatar" class="img-fluid" style="max-width: 50px; max-height: 50px;"> 
+                <!-- <img src= "{{ MEDIA_URL }} {{ pet.avatar }}" alt="Pet Avatar" class="img-fluid rounded-circle" style="max-width: 40px;">  -->
+                {% endif %}
+            </div>
+            <div class="col-2 text-start example">
+                    {{ pet.name }}
+            </div>
+            <div class="col-4 text-start">
+                {{ pet.description }}
+            </div>
+            <div class="col-5 text-end p-0">
+                <a href="{% url 'logs' id=pet.id %}"><button>Log</button></a>
+                <a href="{% url 'petprofile' id=pet.id %}" title="Pet Profile"><button>Profile</button></a>
+                <a href="{% url 'deletepet' pk=pet.id id=pet.id %} "><button title="Delete">Del</button></a>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <p>No pets have been logged.</p>
+        <p>Add a <a href="{% url 'newpet' %}">New Pet</a>.</p>
+        {% endif %}
+
+
+
+
+
+        <!-- <table class="pet_list table table-striped table-hover table-bordered mt-4">
             <thead>
                 <tr>
                     <th>Image</th>
                     <th>Name</th>
-                    <!-- <th>Type</th> -->
+                    < !-- <th>Type</th> -- >
                     <th>Description</th>
                     <th colspan="2">Actions</th>
                 </tr>
@@ -25,14 +62,14 @@
                 <tr>
                     <td>
                     {% if pet.avatar %}
-                    <!-- <img src= "{{ pet.avatar.url }} " alt="Pet Avatar" class="img-fluid rounded-circle" style="max-width: 40px;">  -->
+                    < !-- <img src= "{{ pet.avatar.url }} " alt="Pet Avatar" class="img-fluid rounded-circle" style="max-width: 40px;">  -- >
                     <img src= "/media/{{ pet.avatar }}" alt="Pet Avatar" class="img-fluid rounded-circle" style="max-width: 40px; max-height: 40px;"> 
-                    <!-- <img src= "{{ MEDIA_URL }} {{ pet.avatar }}" alt="Pet Avatar" class="img-fluid rounded-circle" style="max-width: 40px;">  -->
+                    < !-- <img src= "{{ MEDIA_URL }} {{ pet.avatar }}" alt="Pet Avatar" class="img-fluid rounded-circle" style="max-width: 40px;">  -- >
                     {% endif %}
                     </td>
-                    <!-- <td>{{ pet.avatar.url }}</td> -->
+                    < !-- <td>{{ pet.avatar.url }}</td> -- >
                     <td>{{ pet.name }}</td>
-                    <!-- <td>{{ pet.animal_type }}</td> -->
+                    < !-- <td>{{ pet.animal_type }}</td> -- >
                     <td>{{ pet.description }}</td>
                     <td><a href="{% url 'logs' id=pet.id %}"><button>Log</button></a></td>
                     <td><a href="{% url 'petprofile' id=pet.id %}" title="Pet Profile"><button>Bio</button></a></td>
@@ -40,11 +77,8 @@
                 </tr>
                 {% endfor %}
             </tbody>
-        </table>
-        {% else %}
-        <p>No pets have been logged.</p>
-        <p>Add a <a href="{% url 'newpet' %}">New Pet</a>.</p>
-        {% endif %}
+        </table> -->
+        
     </div>
 </div>
 {% endblock %}

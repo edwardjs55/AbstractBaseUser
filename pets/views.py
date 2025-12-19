@@ -2,7 +2,7 @@ from itertools import count
 from django.http import HttpResponse
 from django.template import loader
 from django.shortcuts import get_object_or_404, render, redirect
-from .forms import MyPetsForm
+from .forms import MyPetsForm, MyPets_New_Form
 from .models import MyPets
 from django.views.generic import ListView
 from django.contrib.auth.decorators import login_required
@@ -36,7 +36,7 @@ def PetListView(request):
 
 def create_my_pets_object(request):
         if request.method == 'POST':
-            form = MyPetsForm(request.POST)
+            form = MyPets_New_Form(request.POST)
             if form.is_valid():
                 # form.save() # This creates and saves a new MyObject instance
                 obj = form.save(commit=False)
@@ -44,7 +44,7 @@ def create_my_pets_object(request):
                 obj.save()                
                 return redirect('pets') # Redirect to a success page
         else:
-            form = MyPetsForm()
+            form = MyPets_New_Form()
         return render(request, 'pets/add_new_pet.html', {'form': form})
     
  # obsolete ??   

@@ -2,13 +2,15 @@
 
 {% block content %}
 <div class="row">
-  <div class="col-lg-8 col-md-10 col-sm-12 mx-auto text-center bg-light py-3 mt-3">    
+  <div class="col-lg-8 col-md-10 col-sm-12 mx-auto text-center bg-light py-3 mt-5"
+       style="border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); min-height:600px;">    
      
     <h1>Welcome!</h1>
     <p>Username: {{ user.username }}</p>
 
     <p>Email: {{ user.email }}</p>
     <p> {{ user.first_name }} {{ user.last_name }}</p>
+    <a href="{% url 'pets' %}" class="text-muted">See Your Pets List</a><br><br> 
     {% if user.profile.avatar %}
       <img src="{{ user.profile.avatar.url }}" alt="Profile Avatar" class="img-fluid rounded-circle" style="max-width: 150px; max-height: 150px;">
       <br><br>

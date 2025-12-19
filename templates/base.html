@@ -38,9 +38,21 @@
               </li>
             </div>
 
-            <li class="ms-md-auto me-md-4 nav-item">
-              <a class="nav-link fs-5" href="{% url 'profile' %}">Logged in as: <b>{{ request.user.username }}</b></a>
+            <li class="ms-md-auto me-md-4 nav-item dropdown">
+              <a class="nav-link dropdown-toggle fs-5" role="button" data-bs-toggle="dropdown"
+               href="">Welcome: <b>{{ request.user.username }}</b></a>
+              <ul class="dropdown-menu">
+                <li class="nav-item dropdown-item">
+                  <a class="nav-link fs-5" href="{% url 'profile' %}">Profile</a>
+                </li>
+              {% if request.user.is_superuser %}
+                <li class="nav-item dropdown-item">
+                  <a class="nav-link fs-5" href="{% url 'admin:index' %}">Admin</a>
+                </li>
+              </ul>
+              {% endif %}
             </li>
+
             {% else %}
             <li class="nav-item">
               <a class="nav-link" href="{% url 'login' %}">Login</a>
@@ -57,9 +69,9 @@
     
   {% block body %}  
   <div class="container">
-    <h1 class="text-center logo my-4">
+    <!-- <h1 class="text-center logo my-4">
       <a href="{% url 'home' %}">Django Custom User</a>
-    </h1>
+    </h1> -->
     {% block content %}AbstractBasUser CustomUser Project
     {% endblock content %}
   </div> 

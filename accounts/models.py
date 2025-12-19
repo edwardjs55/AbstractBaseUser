@@ -34,7 +34,10 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     username = models.CharField(unique=False,null=True,blank=True,max_length=150,verbose_name='username')
     first_name = models.CharField(unique=False,null=True,blank=True,max_length=150,verbose_name='first name')
     last_name = models.CharField(unique=False,null=True,blank=True,max_length=150,verbose_name='last name')
+    hint = models.CharField(unique=False,null=True,blank=True,max_length=150,verbose_name='password hint')
     created_at = models.DateTimeField(auto_now_add=True)
+    last_modified = models.DateTimeField(auto_now_add=True)
+    
 
     objects = CustomUserManager()
 
