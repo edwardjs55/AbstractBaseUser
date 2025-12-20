@@ -29,6 +29,8 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(_('email address'), unique=True)
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
+    is_agency_dir = models.BooleanField(default=False)
+    is_agency_vol = models.BooleanField(default=False)
     
     # Add any other custom fields you need
     username = models.CharField(unique=False,null=True,blank=True,max_length=150,verbose_name='username')
