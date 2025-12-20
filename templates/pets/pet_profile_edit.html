@@ -3,10 +3,11 @@
 
 {% block content %}
 <div class="row">
-    <div class="mycp col-lg-8 col-md-10 col-sm-12 mx-auto text-center bg-light py-3 mt-5 pb-5">
+    <div class="mycp col-lg-8 col-md-10 col-sm-12 mx-auto text-center bg-light py-3 mt-md-5 pb-5">
         <h1><a class="text-decoration-none" href="{% url 'petprofile' id=pet.id %}">{{ pet.name }}'s Profile</a></h1>
         <!-- <p>pet profile</p> -->
-        <form method="post" enctype="multipart/form-data" class="pet-form">
+        <button type="submit" class="mb-1" form="petpedit">Save Pet Profile</button>
+        <form method="post" enctype="multipart/form-data" id="petpedit" class="pet-form">
             {% csrf_token %}
             {{ form.as_p }}
             <button type="submit">Save Pet Profile</button>

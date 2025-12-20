@@ -3,9 +3,9 @@ from .models import MyPets
 
 # Register your models here.
 class CustomUserModelAdmin(admin.ModelAdmin):
-        list_display = ('name', 'animal_type','user') # Fields to display in the list view
+        list_display = ('name', 'animal_type','sex','user') # Fields to display in the list view
         search_fields = ('user', 'name','animal_type') # Fields to search by
-        fields = ('user',('name','animal_type','description'),
+        fields = ('user',('name','sex','animal_type','description'),
                   'bday','avatar','color','weight','source','diet','notes',
                   'veterinary','litter_family','location',
                   ('health_rating','health_status','health_issues'),

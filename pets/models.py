@@ -6,6 +6,14 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 
 
 class MyPets(models.Model):
+    
+    class SexChoices(models.TextChoices):
+        FEMALE = 'F', 'Female'
+        MALE = 'M', 'Male'
+        UNSPECIFIED = 'U', 'Unspecified'
+        # You can add more comprehensive options as needed
+    
+    
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
@@ -13,6 +21,8 @@ class MyPets(models.Model):
         )
     name = models.CharField(max_length=100,verbose_name='pet name')
     animal_type = models.CharField(max_length=100,verbose_name='animal type')
+    # sex = models.CharField(max_length=100, blank=True, verbose_name='sex')
+    sex = models.CharField(max_length=1, blank=True, verbose_name='sex', default=SexChoices.UNSPECIFIED, choices=SexChoices.choices)
     description = models.TextField( verbose_name='pet description',blank=True)
     bday = models.DateField(null=True, blank=True, verbose_name='birth date')
     avatar = models.ImageField(default='pet_avatars/default.jpg',upload_to='pet_avatars/',blank=True,verbose_name='pet image')    
