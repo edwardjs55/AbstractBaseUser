@@ -28,6 +28,7 @@ urlpatterns = [
     path("", TemplateView.as_view(template_name="home.html"), name="home"),  # new
     path('pets/', include('pets.urls')),
     path('logs/', include('logs.urls')),    
+    path('agencys/', include('agencys.urls')),    
 ]
 
 urlpatterns += staticfiles_urlpatterns()

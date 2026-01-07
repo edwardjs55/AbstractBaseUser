@@ -29,8 +29,10 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(_('email address'), unique=True)
     is_staff = models.BooleanField(default=False)
     is_active = models.BooleanField(default=True)
+    
     is_agency_dir = models.BooleanField(default=False)
-    is_agency_vol = models.BooleanField(default=False)
+    is_agency_staff = models.BooleanField(default=False)
+    is_agency_vol = models.BooleanField(default=False)    
     
     # Add any other custom fields you need
     username = models.CharField(unique=False,null=True,blank=True,max_length=150,verbose_name='username')
@@ -38,8 +40,7 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
     last_name = models.CharField(unique=False,null=True,blank=True,max_length=150,verbose_name='last name')
     hint = models.CharField(unique=False,null=True,blank=True,max_length=150,verbose_name='password hint')
     created_at = models.DateTimeField(auto_now_add=True)
-    last_modified = models.DateTimeField(auto_now_add=True)
-    
+    last_modified = models.DateTimeField(auto_now_add=True)    
 
     objects = CustomUserManager()
 
@@ -53,7 +54,8 @@ class CustomUser(AbstractBaseUser, PermissionsMixin):
 class Profile(models.Model):
     user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
     avatar = models.ImageField(default='default.jpg', upload_to='profile_images/', blank=True, null=True)
-    bio = models.TextField(blank=True)
+    bio = models.TextField(blank=True)    
+    
 
     def __str__(self):
         return f"{self.user.username}'s Profile"

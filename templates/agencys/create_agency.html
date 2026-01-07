@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} Adoption Agency {% endblock %}
+
+{% block stylesheet %}
+      <link rel="stylesheet" href="{% static 'css/agency.css' %}" />
+    {% endblock stylesheet %}
+
+{% block content %}
+<div class="row mx-md-1">
+  <div class="mycp col-lg-8 col-md-10 col-sm-12 mx-auto text-center bg-light py-3 mt-md-5 pb-5" 
+       style="min-height: 500px;">    
+    <h1>Create New Adoption Agency</h1>
+    {% if user.is_authenticated %}
+    <br><p>Agency Director: {{ user.username }}  / {{ user.email }}</p>    
+    <form method="post">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit">Create Agency</button>
+      <button type="button" onclick="window.history.back()">Cancel</button>
+    </form>
+    <br><br><a href="{% url 'agency_list' %}">Agencies</a>   
+
+    {% else %}
+    <p>You are not logged in</p>
+    <a href="{% url 'login' %}">Log In</a> or <a href="{% url 'register' %}">Sign Up</a>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

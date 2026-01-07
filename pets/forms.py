@@ -5,7 +5,7 @@ from .models import MyPets
 class MyPets_New_Form(forms.ModelForm):
     class Meta:
         model = MyPets
-        fields = ['name', 'animal_type', 'avatar', 'description']
+        fields = ['name', 'animal_type','sex', 'avatar', 'description']
         # Alternatively, you can use `exclude = ['created_at']` to exclude specific fields
 
 class MyPetsForm(forms.ModelForm):

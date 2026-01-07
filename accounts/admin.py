@@ -7,7 +7,7 @@ class CustomUserModelAdmin(admin.ModelAdmin):
         search_fields = ('username', 'email') # Fields to search by
         fields = ('email','username', ('first_name','last_name'),
         ('password'),('hint'),('is_superuser','is_staff','is_active'),
-        ('is_agency_dir','is_agency_vol'),('created_at','last_login'),
+        ('is_agency_dir','is_agency_staff','is_agency_vol'),('created_at','last_login'),
         ('groups','user_permissions'))
 
         # ... other customizations

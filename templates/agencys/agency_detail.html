@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} Adoption Agency {% endblock %}
+
+{% block stylesheet %}
+      <link rel="stylesheet" href="{% static 'css/agency.css' %}" />
+    {% endblock stylesheet %}
+
+{% block content %}
+<div class="row mx-md-1">
+  <div class="mycp col-lg-8 col-md-10 col-sm-12 mx-auto text-center bg-light py-3 mt-md-5 pb-5" 
+       style="min-height: 500px;">    
+       {% if user.is_authenticated %}
+       <h1>{{ agency.name }}</h1>
+    <!-- <h3>Hello, {{ user.username }}.</h3> -->
+    <br>
+    <!-- Hi {{ user.username }}! -->
+    {% if agency %}
+      <!-- <h2>{ { agency.name } }</h2> -->
+      <h2>{{ agency.description }}</h2>
+      <p>Director:{{ agency.director }}</p>
+      <p>Location: {{ agency.location }}</p>
+      <p>{{ agency.address }}</p>
+      <p>Contact: {{ agency.contact_email }}</p>
+      <hr>
+    {% else %}
+      <p>No adoption agencies available at the moment.</p>
+    {% endif %}
+    
+    <!-- <a href="{% url 'pets' %}">Adoptions List</a> -->
+    <a href="{% url 'create_agency' %}"><button>Agencys Adoptions List</button></a><br><br>
+    <a href="{% url 'edit_agency' agency.id %}"><button>Edit Agency</button></a>
+    <a href="{% url 'agency_list' %}"><button>List Agencys</button></a>
+    <a href="{% url 'create_agency' %}"><button>Create Agency</button></a><br><br>
+    <!-- <form action="{% url 'logout' %}" method="post">
+      {% csrf_token %}<br><br>
+      <button type="submit">Log Out</button>
+    </form> -->
+
+    {% else %}
+    <p>You are not logged in</p>
+    <a href="{% url 'login' %}">Log In</a> or <a href="{% url 'register' %}">Sign Up</a>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
