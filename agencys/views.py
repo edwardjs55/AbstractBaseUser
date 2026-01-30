@@ -6,11 +6,15 @@ from .models import Agency
 # Create your views here.
 
 def index(request):
-    agency = Agency.objects.filter(director=request.user).first()
+    agency_id = request.session.get('agency_id', Agency.objects.filter(director=request.user).first().id)
+    request.session['agency_id'] = agency_id  # Set the user's agencyprofile to the current agency
+    #agency = Agency.objects.filter(director=request.user).first()    
+    agency = Agency.objects.get(id=agency_id) #request.session['agency_id'])
     return render(request, 'agencys/index.html', {'agency': agency})
 
 def agency_detail(request, id):
     agency = Agency.objects.get(id=id)
+    request.session['agency_id'] = agency.id  # Set the user's agencyprofile to the current agency
     return render(request, 'agencys/agency_detail.html', {'agency': agency})
 
 def agency_list(request):

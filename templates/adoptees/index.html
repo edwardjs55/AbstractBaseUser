@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} Adoptions {% endblock %}
+
+{% block stylesheet %}
+      <link rel="stylesheet" href="{% static 'css/adoptees.css' %}" />
+    {% endblock stylesheet %}
+
+{% block content %}
+<div class="row mx-md-1">
+  <div class="mycp col-lg-8 col-md-10 col-sm-12 mx-auto text-center bg-light py-3 mt-md-5 pb-5" 
+       style="min-height: 500px;"> 
+       {% if user.is_authenticated %}
+       <h1>{{ adoption.agency }} </h1>
+       <h2>Adoptions Home Page</h2>
+       <hr>       <!-- <h3>Hello, {{ user.username }}.</h3> -->
+       <!-- Hi {{ user.username }}! -->
+       {% if adoption %}
+       <!-- <h2>{ { adoption.name } }</h2> -->
+      <p>AgencyPet Name:{{ adoption.agency_pet_name }}</p>
+      <p>Foster Name:{{ adoption.adopted_pet_name }}</p>
+      <p>Adoption Date:{{ adoption.adoption_date }}</p>
+      <p>Adoption Fee:{{ adoption.adoption_fee }}</p>
+      <p>Adoption Notes:{{ adoption.adoption_notes }}</p>
+
+       <hr>
+       {% else %}
+       <p>No adoption pet information available at the moment.</p>
+       {% endif %}
+       <br><br>
+       <a href="{% url 'adoption_list' %}"><button>List All Adoptions</button></a>
+       <a href="{% url 'adoption_create' %}"><button> Add New Adoption</button></a>       
+        
+      {% else %}
+        <h1>Pet Adoption Agency</h1>
+    <p>You are not logged in</p>
+    <a href="{% url 'login' %}">Log In</a> or <a href="{% url 'register' %}">Sign Up</a>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

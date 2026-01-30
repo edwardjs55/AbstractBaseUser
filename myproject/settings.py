@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'family',
     'logs',
     'agencys',
+    'adoptees',
 ]
 
 MIDDLEWARE = [

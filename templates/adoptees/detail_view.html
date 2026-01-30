@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} Adoption Detail {% endblock %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'css/adoptees.css' %}" />
+{% endblock stylesheet %}
+
+{% block content %}
+<div class="row mx-md-1">
+  <div class="mycp col-lg-8 col-md-10 col-sm-12 mx-auto text-center bg-light py-3 mt-md-5 pb-5"
+    style="min-height: 500px;">
+    <!-- <h1>Adoption Details</h1> -->
+    {% if user.is_authenticated %}   
+    {% if instance %}
+      <h1> Adoption Details</h1>
+      <br>
+       <a href="{% url 'adoption_list' %}"><button>Back to Adoptions List</button></a>
+       <a href="{% url 'adoption_create' %}"><button> Add New Adoption</button></a>
+       <a href="{% url 'adoption_update' instance.id %}"><button> Edit Adoption Details</button></a>
+      <br><br>
+      <!-- { { form.as_p } } -->
+      <h2>{{ instance.agency_pet_name }}'s Details</h2>
+      {% if instance.pet_photo %}
+      <img class="img-fluid" src="/media/{{ instance.pet_photo }}" alt="Photo of {{ instance.agency_pet_name }}">
+      {% endif %}
+      <br><br>
+      {% comment %} Display field names and values in a table {% endcomment %}  
+      
+    <table>
+        <thead>
+            <tr>
+                <th>Field Name</th>
+                <th>Value</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for field in field_data %}
+            <tr>
+                <td>{{ field.verbose_name }}</td>
+                <td>{{ field.value }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+    {% else %}
+    <p>No adoption information available at the moment.</p>
+    {% endif %}
+
+    {% else %}
+    <p>You are not logged in</p>
+    <a href="{% url 'login' %}">Log In</a> or <a href="{% url 'register' %}">Sign Up</a>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

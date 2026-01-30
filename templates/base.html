@@ -38,6 +38,11 @@
               <li class="nav-item">
                 <a class="nav-link fs-5" href="{% url 'pets' %}">Family</a>
               </li>
+              {% if request.user.is_agency_dir %}
+              <li class="nav-item">
+                <a class="nav-link  fs-5" href="{% url 'agency' %}">Agency</a>               
+              </li>
+              {% endif %}
             </div>
 
             <li class="ms-md-auto me-md-4 nav-item dropdown">

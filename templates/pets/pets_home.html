@@ -3,38 +3,42 @@
 {% block content %}
 <div class="row">
     <div class="mycp col-lg-8 col-md-10 col-sm-12 mx-auto text-center bg-light py-3 mt-md-5 pb-5">
-        <h1>All Your Pets List</h1>
+        <h1>Your Pets List</h1>
         <!-- <h2>Your Pets List</h2> -->
         {% if user.is_authenticated %}
         {% if pet_list %}
-        <h4 class="mt-4">{{ user.username }} , you have {{ pet_list|length }} {{ pet_list|length|pluralize:"pet,pets" }}.</h4>
-        <!-- <p>{{ user.username }}</p>  Welcome message -->
+        <h4 class="mt-4">{{ user.username }} , you have {{ pet_list|length }} {{ pet_list|length|pluralize:"pet,pets"}}.
+        </h4>
         {% endif %}
         {% endif %}
         <a href="{% url 'newpet' %}" class="display-6 text-decoration-none">Add a New Pet</a>
         <hr>
-        
         {% if pet_list %}
-        <!-- <h3 class="mt-4">You have {{ pet_list|length }} {{ pet_list|length|pluralize:"pet,pets" }}.</h3> -->
         {% for pet in pet_list %}
         <div class="row align-items-start border border-secondary rounded p-1 mb-2 mx-1">
             <div class="col-1 p-0">
-                {% if pet.avatar %}
-                <!-- <img src= "{{ pet.avatar.url }} " alt="Pet Avatar" class="img-fluid rounded-circle" style="max-width: 40px;">  -->
-                <img src= "/media/{{ pet.avatar }}" alt="Pet Avatar" class="img-fluid" style="max-width: 50px; max-height: 50px;"> 
-                <!-- <img src= "{{ MEDIA_URL }} {{ pet.avatar }}" alt="Pet Avatar" class="img-fluid rounded-circle" style="max-width: 40px;">  -->
-                {% endif %}
+                <a href="{% url 'logs' id=pet.id %}" class="text-decoration-none text-dark">
+                    {% if pet.avatar %}
+                    <!-- <img src= "{{ pet.avatar.url }} " alt="Pet Avatar" class="img-fluid rounded-circle" style="max-width: 40px;">  -->
+                    <img src="/media/{{ pet.avatar }}" alt="Pet Avatar" class="img-fluid"
+                        style="max-width: 50px; max-height: 50px;">
+                    <!-- <img src= "{{ MEDIA_URL }} {{ pet.avatar }}" alt="Pet Avatar" class="img-fluid rounded-circle" style="max-width: 40px;">  -->
+                    {% endif %}
+                </a>
             </div>
-            <div class="col-2 text-start example">
-                    {{ pet.name }}
+            <div class="col-2 text-center example">
+                <a href="{% url 'logs' id=pet.id %}" class="text-decoration-none text-dark">
+                    <p> {{ pet.name }}</p>
+                </a>
             </div>
             <div class="col-4 text-start">
-                {{ pet.description }}
+                {{ pet.description }}`
             </div>
             <div class="col-5 text-end p-0">
                 <a href="{% url 'logs' id=pet.id %}"><button>Log</button></a>
                 <a href="{% url 'petprofile' id=pet.id %}" title="Pet Profile"><button>Profile</button></a>
                 <a href="{% url 'deletepet' pk=pet.id id=pet.id %} "><button title="Delete">Del</button></a>
+                <p class=""> {{ pet.bday }}</p>
             </div>
         </div>
         {% endfor %}
@@ -78,7 +82,7 @@
                 {% endfor %}
             </tbody>
         </table> -->
-        
+
     </div>
 </div>
 {% endblock %}

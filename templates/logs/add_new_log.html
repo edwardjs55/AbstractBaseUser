@@ -4,9 +4,9 @@
 {% block content %}
 <div class="row">
     <div class="mycp col-lg-8 col-md-10 col-sm-12 mx-auto text-center bg-light py-3 mt-md-5 pb-5">
-        <h1>Add New Pet Log</h1>
-        <p>{{ user.username }} Pets</p>
-        <p>{{ pet.name }}</p>
+        <h1>Add New Pet Medical Record Log</h1>
+        <h2>{{ pet.name }}</h2>
+        <!-- <h4>{{ user.username }} Pets</h4> -->
         <form method="post">
             {% csrf_token %}
             {{ form.as_p }}

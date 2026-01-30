@@ -35,6 +35,7 @@ def PetListView(request):
     
 
 def create_my_pets_object(request):
+        print("create_my_pets_object called")
         if request.method == 'POST':
             form = MyPets_New_Form(request.POST)
             if form.is_valid():

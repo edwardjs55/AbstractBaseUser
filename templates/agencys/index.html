@@ -10,7 +10,7 @@
 {% block content %}
 <div class="row mx-md-1">
   <div class="mycp col-lg-8 col-md-10 col-sm-12 mx-auto text-center bg-light py-3 mt-md-5 pb-5" 
-       style="min-height: 500px;">    
+       style="min-height: 500px;"> 
        {% if user.is_authenticated %}
        <h1>{{ agency.name }}</h1>
        <hr>
@@ -29,8 +29,7 @@
        {% endif %}
        <br><br>
        <a href="{% url 'agency_list' %}"><button>Agencies List</button></a>
-       <a href="{% url 'agency_list' %}"><button>Agencys Adoptions List</button></a>
-       
+       <a href="{% url 'adoption_list' %}"><button>Agencys Adoptions List</button></a>       
         
         {% else %}
         <h1>Pet Adoption Agency</h1>

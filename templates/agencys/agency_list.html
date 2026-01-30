@@ -15,7 +15,7 @@
     {% if user.is_authenticated %}
     <!-- <br><h3>Hello, {{ user.username }}.</h3> -->
     <!-- Hi {{ user.username }}! -->
-    <h4>Here is a list of adoption agencies:</h4><hr>
+    <h4>Here is a list of your adoption agencies:</h4><hr>
     {% if agencies %}
       {% for agency in agencies %} 
       <a href="{% url 'agency_detail' agency.id %}"> 

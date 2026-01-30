@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} Adoptions {% endblock %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'css/adoptees.css' %}" />
+{% endblock stylesheet %}
+
+{% block content %}
+<div class="row mx-md-1">
+    <div class="mycp col-lg-8 col-md-10 col-sm-12 mx-auto text-center bg-light py-3 mt-md-5 pb-5"
+        style="min-height: 500px;">
+        {% if user.is_authenticated %}
+        <h1>{{ agency_name }} </h1>
+        <h2>Adoptions List</h2>
+        <hr>
+        {% if adoptions %}
+        {% for adoption in adoptions %}
+            <!-- <h2>{ { adoption.name } }</h2> -->
+            <!-- <p>AgencyPet Name:{{ adoption.agency_pet_name }}</p>
+            <p>Foster Name:{{ adoption.adopted_pet_name }}</p>
+            <p>Adoption Date:{{ adoption.adoption_date }}</p>
+            <p>Adoption Fee:{{ adoption.adoption_fee }}</p>
+            <p>Adoption Notes:{{ adoption.adoption_notes }}</p>
+            <hr> -->
+            {% comment %} Link to adoption detail page {% endcomment %}
+            <div class="row mb-3 text-start">
+                <div class="col-4">
+                    {% if adoption.pet_photo %}
+
+                    <a href="{% url 'adoption_detail_view' adoption.id %}">
+                        <!-- <img src="/media/{{ adoption.pet_photo }}" alt="Photo of {{ adoption.agency_pet_name }}" width="200" height="150"><br> -->
+                        <img class="img-fluid" src="/media/{{ adoption.pet_photo }}" alt="Photo of {{ adoption.agency_pet_name }}"><br>
+                    </a>
+                    {% endif %}
+                </div>
+                <div class="col">
+                    <!-- <strong>{{ adoption.agency_pet_name }}</strong> -->
+                    
+                    <a href="{% url 'adoption_detail_view' adoption.id %}"><button><strong>{{ adoption.agency_pet_name }}</strong></button></a>
+                    <br>
+                    {{ adoption.agency_pet_name }} is a {{ adoption.pet_gender }} {{ adoption.pet_type }}.<br>
+                    {{ adoption.pet_description }}. <br>
+                </div>
+                <br>
+            </div>
+        {% endfor %}
+        <hr>
+        {% else %}
+        <p>No adoption pet information available at the moment.</p>
+        {% endif %}
+        <br><br>
+        <a href="{% url 'adoption_list' %}"><button>List Adoptions</button></a>
+        <a href="{% url 'adoption_create' %}"><button> Add New Adoption</button></a>
+
+        {% else %}
+        <h1>Pet Adoption Agency</h1>
+        <p>You are not logged in</p>
+        <a href="{% url 'login' %}">Log In</a> or <a href="{% url 'register' %}">Sign Up</a>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

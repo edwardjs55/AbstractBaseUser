@@ -10,6 +10,7 @@
             {% csrf_token %}
             {{ form.as_p }}
             <button type="submit">Add a new Pet</button>
+            <a href="{% url 'pets' %}"><button type="button">Cancel</button></a>
             <a href="{% url 'pets' %}"><button type="button">Pets Home</button></a>
         </form>
     </div>

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} CreateAdoption {% endblock %}
+
+{% block stylesheet %}
+<link rel="stylesheet" href="{% static 'css/adoptees.css' %}" />
+{% endblock stylesheet %}
+
+{% block content %}
+<div class="row mx-md-1">
+  <div class="mycp col-lg-8 col-md-10 col-sm-12 mx-auto text-center bg-light py-3 my-md-5 pb-5"
+    style="min-height: 500px;">
+    <!-- <h1>Adoption Details</h1> -->
+    {% if user.is_authenticated %}   
+    {% if adoption %}
+    <h1>Create New Adoption</h1>
+    <br>      
+    <a href="{% url 'adoption_list' %}"><button>Back to Adoptions List</button></a>
+    <br><br>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <button type="submit">Save Changes</button><br><br>
+        {{ adoption.as_p }} <br>             
+        <button type="submit">Save Changes</button><br><br>
+    </form>
+    <a href="{% url 'adoption_detail' 1 %}"><button>Cancel Changes</button></a>
+    <a href="{% url 'adoption_list' %}"><button>Back to Adoptions List</button></a>
+    {% else %}
+    <p>No adoption information available at the moment.</p>
+    {% endif %}
+
+    {% else %}
+    <p>You are not logged in</p>
+    <a href="{% url 'login' %}">Log In</a> or <a href="{% url 'register' %}">Sign Up</a>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
